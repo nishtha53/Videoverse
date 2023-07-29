@@ -6,8 +6,7 @@ import { MdWatchLater } from "react-icons/md";
 export const SideBar = () => {
   const activeStyle = {
     fontWeight: "bold",
-    backgroundColor: "#1B5299",
-    color:"white"
+    backgroundColor: " #8553fa48",
   };
   return (
     <aside className="sticky flex flex-col justify-between h-[90vh] top-0 left-0 overflow-y-none overflow-x-hidden items-center border-r border-primaryDisabled">
