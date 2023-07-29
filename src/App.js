@@ -24,7 +24,7 @@ function App() {
         <Route path="/video/:videoId" element={<SingleVideo />} />
       </Routes>
       <Toaster
-        position="top-center"
+        position="top-right"
         reverseOrder={false}
         containerStyle={{
           top: "4rem",

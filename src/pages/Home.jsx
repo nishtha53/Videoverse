@@ -7,7 +7,7 @@ export const Home = () => {
   } = useVideos();
   return (
     <div>
-      <div className="grid grid-cols-[12.5rem_1fr]">
+      <div className="grid grid-cols-[14.5rem_1fr]">
         <SideBar />
         <div className="py-1 px-4">
           <h1 className="text-2xl py-2 text-center">Categories</h1>
