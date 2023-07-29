@@ -1,7 +1,7 @@
 import { categories, videos } from "../data/data";
 import { actionTypes } from "../utils/constants";
 
-const { ADD_TO_WATCH_LATER, REMOVE_FROM_WATCH_LATER, SET_SEARCH_INPUT, ADD_NOTE,DELETE_NOTE,UPDATE_NOTE } =
+const { ADD_TO_WATCH_LATER, REMOVE_FROM_WATCH_LATER, SET_SEARCH_INPUT, ADD_NOTE,DELETE_NOTE,UPDATE_NOTE,CREATE_PLAYLIST,DELETE_PLAYLIST,ADD_VIDEO_TO_PLAYLIST } =
   actionTypes;
 
 export const initialState = {
@@ -10,6 +10,7 @@ export const initialState = {
   watchLaterVideos: [],
   searchInput: "",
   notes: [],
+  playlists: [],
 };
 
 export const reducerFunction = (state, { type, payload }) => {
@@ -45,6 +46,24 @@ export const reducerFunction = (state, { type, payload }) => {
           ...state,
           notes: state.notes.filter((note) => note.id !== payload),
         };
+        case CREATE_PLAYLIST:
+          return { ...state, playlists: [...state.playlists, payload] };
+        case DELETE_PLAYLIST:
+          return {
+            ...state,
+            playlists: state.playlists.filter(
+              (playlist) => playlist?._id !== payload?._id
+            ),
+          };
+        case ADD_VIDEO_TO_PLAYLIST:
+          return {
+            ...state,
+            playlists: state?.playlists.map((item) =>
+              item._id === payload.playlist
+                ? [...item.videos, payload.currentVideo]
+                : item
+            ),
+          };
     default:
       return state;
   }
