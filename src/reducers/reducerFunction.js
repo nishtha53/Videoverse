@@ -1,7 +1,7 @@
 import { categories, videos } from "../data/data";
 import { actionTypes } from "../utils/constants";
 
-const { ADD_TO_WATCH_LATER, REMOVE_FROM_WATCH_LATER, SET_SEARCH_INPUT } =
+const { ADD_TO_WATCH_LATER, REMOVE_FROM_WATCH_LATER, SET_SEARCH_INPUT, ADD_NOTE,DELETE_NOTE,UPDATE_NOTE } =
   actionTypes;
 
 export const initialState = {
@@ -9,6 +9,7 @@ export const initialState = {
   videos: videos,
   watchLaterVideos: [],
   searchInput: "",
+  notes: [],
 };
 
 export const reducerFunction = (state, { type, payload }) => {
@@ -27,6 +28,23 @@ export const reducerFunction = (state, { type, payload }) => {
       };
     case SET_SEARCH_INPUT:
       return { ...state, searchInput: payload };
+      case ADD_NOTE:
+        return {
+          ...state,
+          notes: [...state.notes, payload],
+        };
+      case UPDATE_NOTE:
+        return {
+          ...state,
+          notes: state.notes.map((note) =>
+            note.id === payload.id ? payload : note
+          ),
+        };
+      case DELETE_NOTE:
+        return {
+          ...state,
+          notes: state.notes.filter((note) => note.id !== payload),
+        };
     default:
       return state;
   }
