@@ -1,5 +1,5 @@
 import { Link, useNavigate } from "react-router-dom";
-import { GrCirclePlay, GrSearch } from "react-icons/gr";
+import { GrSearch } from "react-icons/gr";
 import { useVideos } from "../contexts/videosContext";
 import { actionTypes } from "../utils/constants";
 
