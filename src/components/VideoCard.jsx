@@ -1,40 +1,47 @@
 import { MdOutlineAutoDelete, MdOutlineWatchLater } from "react-icons/md";
 import { useVideos } from "../contexts/videosContext";
 import { actionTypes } from "../utils/constants";
+import { toast } from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 export const VideoCard = ({ video }) => {
+  const navigate = useNavigate();
+
   const { dispatch, isPresentInWatchLater } = useVideos();
 
   const { ADD_TO_WATCH_LATER, REMOVE_FROM_WATCH_LATER } = actionTypes;
 
   return (
-    <div className="w-[20rem] border border-bgSecondary rounded hover:cursor-pointer hover:opacity-95">
+    <div className="w-[20rem] border border-bgSecondary rounded">
       <div className="w-full relative">
         <img
           src={video?.thumbnail}
           alt={video?.title}
-          className="object-cover w-full"
+          className="object-cover w-full hover:cursor-pointer hover:opacity-95"
+          onClick={() => navigate(`/video/${video?._id}`)}
         />
         <div className="absolute top-0 right-0 bg-white p-1">
           {isPresentInWatchLater(video) ? (
             <span
-              onClick={() =>
-                dispatch({ type: REMOVE_FROM_WATCH_LATER, payload: video })
-              }
+              onClick={() => {
+                dispatch({ type: REMOVE_FROM_WATCH_LATER, payload: video });
+                toast.success("Video removed from watch later.");
+              }}
             >
               <MdOutlineAutoDelete
-                className="text-xl"
+                className="text-xl cursor-pointer"
                 title="Remove from Watch Later"
               />
             </span>
           ) : (
             <span
-              onClick={() =>
-                dispatch({ type: ADD_TO_WATCH_LATER, payload: video })
-              }
+              onClick={() => {
+                dispatch({ type: ADD_TO_WATCH_LATER, payload: video });
+                toast.success("Video added to watch later.");
+              }}
             >
               <MdOutlineWatchLater
-                className="text-xl"
+                className="text-xl cursor-pointer"
                 title="Add to Watch Later"
               />
             </span>

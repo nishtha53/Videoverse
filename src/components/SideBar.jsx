@@ -2,12 +2,14 @@ import { NavLink } from "react-router-dom";
 import { IoMdHome, IoMdCompass } from "react-icons/io";
 import { FaFolderPlus } from "react-icons/fa";
 import { MdWatchLater } from "react-icons/md";
+import { border } from "@mui/system";
 
 export const SideBar = () => {
   const activeStyle = {
     fontWeight: "bold",
     backgroundColor: "#1B5299",
-    color:"#fff"
+    color:"#fff",
+    borderRadius: "9999px",
   };
   return (
     <aside className="sticky flex flex-col justify-between h-[90vh] top-0 left-0 overflow-y-none overflow-x-hidden items-center border-r border-primaryDisabled">
